@@ -54,6 +54,8 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <CodesignKey>iPhone Developer</CodesignKey>
+    <IpaPackageName />
+    <MtouchI18n />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

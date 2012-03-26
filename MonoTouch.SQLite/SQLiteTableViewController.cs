@@ -183,16 +183,20 @@ namespace MonoTouch.SQLite
 			
 			if (SearchModel == null)
 				SearchModel = CreateModel (true);
-			
-			SearchDisplayController.SearchResultsTableView.AllowsMultipleSelectionDuringEditing = false;
-			SearchDisplayController.SearchResultsTableView.AllowsSelectionDuringEditing = false;
-			SearchDisplayController.SearchResultsTableView.AllowsMultipleSelection = false;
+			if(UIDevice.CurrentDevice.CheckSystemVersion(5,0))
+			{
+				SearchDisplayController.SearchResultsTableView.AllowsMultipleSelectionDuringEditing = false;
+				SearchDisplayController.SearchResultsTableView.AllowsSelectionDuringEditing = false;
+				SearchDisplayController.SearchResultsTableView.AllowsMultipleSelection = false;
+			}
 			SearchDisplayController.SearchResultsTableView.AllowsSelection = false;
 			SearchDisplayController.SearchResultsTableView.SectionFooterHeight = 0;
-			
-			TableView.AllowsMultipleSelectionDuringEditing = false;
-			TableView.AllowsSelectionDuringEditing = false;
-			TableView.AllowsMultipleSelection = false;
+			if(UIDevice.CurrentDevice.CheckSystemVersion(5,0))
+			{
+				TableView.AllowsMultipleSelectionDuringEditing = false;
+				TableView.AllowsSelectionDuringEditing = false;
+				TableView.AllowsMultipleSelection = false;
+			}
 			TableView.AllowsSelection = false;
 			TableView.SectionFooterHeight = 0;
 		}
@@ -289,7 +293,9 @@ namespace MonoTouch.SQLite
 		
 		protected override int RowsInSection (UITableView tableView, int section)
 		{
-			return ModelForTableView (tableView).GetRowCount (section);
+			var rows = ModelForTableView (tableView).GetRowCount (section);
+			Console.WriteLine("Number of rows: " + rows);
+			return rows;
 		}
 		
 		/// <summary>

@@ -619,6 +619,28 @@ namespace MonoTouch.SQLite
 			Commit ();
 			return c;
 		}
+		
+		public int InsertAll (System.Collections.IEnumerable objects,string extra)
+		{
+			BeginTransaction ();
+			var c = 0;
+			foreach (var r in objects) {
+				c += Insert (r,extra);
+			}
+			Commit ();
+			return c;
+		}
+		
+		public int InsertAll (System.Collections.IEnumerable objects, Type objType)
+		{
+			BeginTransaction ();
+			var c = 0;
+			foreach (var r in objects) {
+				c += Insert (r,objType);
+			}
+			Commit ();
+			return c;
+		}
 
 		/// <summary>
 		/// Inserts the given object and retrieves its
